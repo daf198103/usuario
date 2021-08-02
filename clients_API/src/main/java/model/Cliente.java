@@ -1,5 +1,7 @@
 package model;
 
+import DTO.ClienteDto;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,6 +9,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 
 @Entity
@@ -33,6 +36,7 @@ public class Cliente implements Serializable {
     private String estado;
     @Column(name="cep", length=8)
     private String cep;
+
 
 
     public Cliente() {
@@ -167,5 +171,19 @@ public class Cliente implements Serializable {
                 ", estado='" + estado + '\'' +
                 ", cep='" + cep + '\'' +
                 '}';
+    }
+    public Cliente parseClienteOptional(Optional<Cliente> cli) {
+        Cliente cliente = new Cliente();
+         cliente.setId(cli.get().getId());
+         cliente.setNome(cli.get().getNome());
+         cliente.setSobrenome(cli.get().getSobrenome());
+         cliente.setTelefone(cli.get().getTelefone());
+         cliente.setDataNascto(cli.get().getDataNascto());
+         cliente.setEndereco(cli.get().getEndereco());
+         cliente.setBairro(cli.get().getBairro());
+         cliente.setCidade(cli.get().getCidade());
+         cliente.setEstado(cli.get().getEstado());
+         cliente.setCep(cli.get().getCep());
+        return  cliente;
     }
 }

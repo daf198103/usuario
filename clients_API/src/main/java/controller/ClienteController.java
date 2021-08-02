@@ -1,6 +1,7 @@
 package controller;
 
 
+import DTO.ClienteDto;
 import Service.ClienteService;
 import model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +29,22 @@ public class ClienteController {
     private ClienteService service;
 
     @GetMapping("/clientes")
-    public List<Cliente> findAll() {
+    public List<ClienteDto> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/clientes/{id}")
-    public Optional<Cliente> findById(Long id) {
+    public ClienteDto findById(Long id) {
         return service.findById(id);
     }
 
     @PostMapping("/clientes/save")
-    public void save(@RequestBody Cliente cliente) {
-        service.save(cliente);
+    public ClienteDto save(@RequestBody Cliente cliente) {
+        return service.save(cliente);
     }
 
     @PutMapping("/clientes/update")
-    public Object update(@RequestBody Cliente cliente) {
+    public ClienteDto update(@RequestBody Cliente cliente) {
         return service.update(cliente);
     }
 
