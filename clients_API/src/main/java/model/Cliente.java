@@ -4,6 +4,7 @@ import DTO.ClienteDto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Table(name="CLI_CLIENTE")
 public class Cliente implements Serializable {
 
-    @Id
+    @Id @GeneratedValue
     private Long id ;
     @Column(name="nome", length=50)
     private String nome;
