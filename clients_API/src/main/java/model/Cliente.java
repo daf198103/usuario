@@ -33,7 +33,7 @@ public class Cliente implements Serializable {
     private String bairro;
     @Column(name="cidade", length=50)
     private String cidade;
-    @Column(name="endereco", length=2)
+    @Column(name="estado", length=2)
     private String estado;
     @Column(name="cep", length=8)
     private String cep;

@@ -1,8 +1,9 @@
 package Service;
 
 import DTO.ClienteDto;
-import jdk.internal.jline.internal.Log;
 import model.Cliente;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.ClienteRepository;
@@ -18,6 +19,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository repository;
+    
+    @Autowired
+    private Logger log;
 
 
     public List<ClienteDto>findAll(){
@@ -44,11 +48,11 @@ public class ClienteService {
     public ClienteDto save(Cliente cliente){
         ClienteDto cliDto = new ClienteDto();
         if(cliente.equals(null)){
-            Log.info("Cliente nulo");
+            log.info("Cliente nulo");
             return new ClienteDto();
         } else {
             repository.save(cliente);
-            Log.info("Cliente salvo com sucesso!" + "nome:" + cliente.getNome());
+            log.info("Cliente salvo com sucesso!" + "nome:" + cliente.getNome());
             Optional<Cliente> cli = repository.findById(cliente.getId());
             if(cli!=null){
                 cliDto.parseClienteDto(cliente);
@@ -61,16 +65,16 @@ public class ClienteService {
     public void deleteById(Long id){
         if(id != null || id != 0 ) {
             repository.deleteById(id);
-            Log.info("Cliente deletado com sucesso!");
+            log.info("Cliente deletado com sucesso!");
         } else {
-            Log.info("Id inválido! ");
+            log.info("Id inválido! ");
         }
     }
 
     public ClienteDto update(Cliente cliente) {
         ClienteDto cliDto = new ClienteDto();
        repository.save(cliente);
-       Log.info("Update realizado com sucesso!");
+       log.info("Update realizado com sucesso!");
         Optional<Cliente> cli = repository.findById(cliente.getId());
         if(cli!=null){
             cliDto.parseClienteDto(cliente);
